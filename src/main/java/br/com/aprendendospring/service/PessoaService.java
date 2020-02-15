@@ -26,4 +26,12 @@ public class PessoaService {
 	public Optional<Pessoa> buscarPorId(Long id) {
 		return pessoaRepository.findById(id);
 	}
+
+	public Boolean deletar(Long id) {
+		if (buscarPorId(id).isPresent()) {
+			pessoaRepository.deleteById(id);
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+	}
 }
