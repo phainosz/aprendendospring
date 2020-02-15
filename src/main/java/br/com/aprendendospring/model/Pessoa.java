@@ -1,6 +1,7 @@
 package br.com.aprendendospring.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,8 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String abreviacao;
+	private Integer idade;
+	private LocalDate nascimento;
 
 	public String getNome() {
 		return nome;
@@ -25,12 +27,20 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getAbreviacao() {
-		return abreviacao;
+	public Integer getIdade() {
+		return idade;
 	}
 
-	public void setAbreviacao(String abreviacao) {
-		this.abreviacao = abreviacao;
+	public void setIdade(Integer idade) {
+		this.idade = idade;
+	}
+
+	public LocalDate getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(LocalDate nascimento) {
+		this.nascimento = nascimento;
 	}
 
 	public Long getId() {
