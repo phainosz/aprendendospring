@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.sun.istack.NotNull;
 
 import br.com.aprendendospring.model.Pessoa;
 import br.com.aprendendospring.service.PessoaService;
@@ -48,6 +51,13 @@ public class PessoaController {
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deletar(@PathVariable("id") Long id) {
 		return pessoasService.deletar(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+	}
+
+	@PutMapping("{id}")
+	public ResponseEntity<?> atualizar(@NotNull @PathVariable("id") Long id, @RequestBody Pessoa pessoa) {
+		Pessoa atualizar = pessoasService.atualizar(id, pessoa);
+
+		return atualizar != null ? ResponseEntity.ok(atualizar) : ResponseEntity.notFound().build();
 	}
 
 	private URI getUri(Long id) {

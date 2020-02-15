@@ -34,4 +34,20 @@ public class PessoaService {
 		}
 		return Boolean.FALSE;
 	}
+
+	public Pessoa atualizar(Long id, Pessoa pessoa) {
+		Optional<Pessoa> optional = buscarPorId(id);
+		if (optional.isPresent()) {
+			Pessoa pessoaDb = optional.get();
+			pessoaDb.setNome(pessoa.getNome());
+			pessoaDb.setIdade(pessoa.getIdade());
+			pessoaDb.setNascimento(pessoa.getNascimento());
+			pessoaRepository.save(pessoaDb);
+
+			return pessoaDb;
+		} else {
+			return null;
+		}
+
+	}
 }
