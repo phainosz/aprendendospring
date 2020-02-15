@@ -1,5 +1,6 @@
 package br.com.aprendendospring.aprendendospring;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,21 +26,24 @@ public class PessoaTest {
 		pessoa.setIdade(27);
 		pessoa.setNome("Paulo Henrique");
 		pessoa.setNascimento(LocalDate.parse("1993-01-19"));
-		
-		//inserir
+
+		// inserir
 		Pessoa inserir = pessoaService.inserir(pessoa);
 
 		Long id = inserir.getId();
-		
-		//buscar
+
+		// buscar
 		assertNotNull(id);
 		assertTrue(pessoaService.buscarPorId(inserir.getId()).isPresent());
-		
-		//atualizar
-		inserir.setNome("Outro nome");
-		pessoaService.atualizar();
 
-		//deletar
+		// atualizar
+		String novoNome = "Novo nome";
+		inserir.setNome(novoNome);
+		Pessoa atualizar = pessoaService.atualizar(id, inserir);
+		assertNotNull(atualizar);
+		assertEquals(atualizar.getNome(), novoNome);
+
+		// deletar
 		pessoaService.deletar(id);
 		assertFalse(pessoaService.buscarPorId(id).isPresent());
 	}
