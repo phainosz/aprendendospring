@@ -42,15 +42,6 @@ public class PessoaControllerTest {
 
 	@Test
 	public void teste1() {
-		List<Pessoa> pessoas = getPessoas("/pessoas").getBody();
-		assertTrue(pessoas.isEmpty());
-
-		Pessoa pessoa = getPessoa("/pessoa/1").getBody();
-		assertTrue(pessoa.getId() == null);
-	}
-
-	@Test
-	public void teste2() {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setIdade(27);
 		pessoa.setNome("Paulo");
@@ -66,5 +57,12 @@ public class PessoaControllerTest {
 		assertEquals(pessoaInserida.getId(), 1L);
 
 		rest.delete(location);
+
+	}
+
+	@Test
+	public void teste2() {
+		List<Pessoa> pessoas = getPessoas("/pessoas").getBody();
+		assertTrue(pessoas.isEmpty());
 	}
 }
