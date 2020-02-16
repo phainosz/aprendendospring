@@ -23,31 +23,23 @@ public class PessoaService {
 		return pessoa != null ? pessoaRepository.save(pessoa) : null;
 	}
 
-	public Optional<Pessoa> buscarPorId(Long id) {
-		return pessoaRepository.findById(id);
+	public Pessoa buscarPorId(Long id) {
+		Optional<Pessoa> optional = pessoaRepository.findById(id);
+		return optional.isPresent() ? optional.get() : optional.orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
 	}
 
-	public Boolean deletar(Long id) {
-		if (buscarPorId(id).isPresent()) {
-			pessoaRepository.deleteById(id);
-			return Boolean.TRUE;
-		}
-		return Boolean.FALSE;
+	public void deletar(Long id) {
+		pessoaRepository.deleteById(id);
 	}
 
 	public Pessoa atualizar(Long id, Pessoa pessoa) {
-		Optional<Pessoa> optional = buscarPorId(id);
-		if (optional.isPresent()) {
-			Pessoa pessoaDb = optional.get();
-			pessoaDb.setNome(pessoa.getNome());
-			pessoaDb.setIdade(pessoa.getIdade());
-			pessoaDb.setNascimento(pessoa.getNascimento());
-			pessoaRepository.save(pessoaDb);
+		Pessoa pessoaDb = buscarPorId(id);
+		pessoaDb.setNome(pessoa.getNome());
+		pessoaDb.setIdade(pessoa.getIdade());
+		pessoaDb.setNascimento(pessoa.getNascimento());
+		pessoaRepository.save(pessoaDb);
 
-			return pessoaDb;
-		} else {
-			return null;
-		}
+		return pessoaDb;
 
 	}
 }

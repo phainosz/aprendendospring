@@ -1,10 +1,8 @@
-package br.com.aprendendospring.api;
+package br.com.aprendendospring.api.endpoint;
 
 import java.net.URI;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +33,8 @@ public class PessoaController {
 
 	@GetMapping("{id}")
 	public ResponseEntity<?> buscarPorId(@PathVariable("id") Long id) {
-		Optional<Pessoa> pessoaOptional = pessoasService.buscarPorId(id);
-		if (pessoaOptional.isPresent()) {
-			return ResponseEntity.ok(pessoaOptional.get());
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não encontrado");
+		Pessoa pessoa = pessoasService.buscarPorId(id);
+			return ResponseEntity.ok(pessoa);
 	}
 
 	@PostMapping
@@ -50,7 +45,8 @@ public class PessoaController {
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deletar(@PathVariable("id") Long id) {
-		return pessoasService.deletar(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+		pessoasService.deletar(id);
+		return ResponseEntity.ok().build();
 	}
 
 	@PutMapping("{id}")
