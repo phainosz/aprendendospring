@@ -1,4 +1,4 @@
-package br.com.aprendendospring.controller;
+package br.com.aprendendospring.api;
 
 import java.net.URI;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sun.istack.NotNull;
 
-import br.com.aprendendospring.model.Pessoa;
+import br.com.aprendendospring.entity.Pessoa;
 import br.com.aprendendospring.service.PessoaService;
 
 @RestController

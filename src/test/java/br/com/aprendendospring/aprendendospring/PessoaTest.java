@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.aprendendospring.model.Pessoa;
+import br.com.aprendendospring.entity.Pessoa;
 import br.com.aprendendospring.service.PessoaService;
 
 @SpringBootTest

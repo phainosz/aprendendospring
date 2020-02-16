@@ -1,4 +1,4 @@
-package br.com.aprendendospring.model;
+package br.com.aprendendospring.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
