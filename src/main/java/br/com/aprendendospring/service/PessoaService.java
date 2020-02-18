@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.aprendendospring.api.exception.MyNotFoundException;
 import br.com.aprendendospring.entity.Pessoa;
 import br.com.aprendendospring.repository.PessoaRepository;
 
@@ -25,7 +26,7 @@ public class PessoaService {
 
 	public Pessoa buscarPorId(Long id) {
 		Optional<Pessoa> optional = pessoaRepository.findById(id);
-		return optional.isPresent() ? optional.get() : optional.orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+		return optional.isPresent() ? optional.get() : optional.orElseThrow(() -> new MyNotFoundException("Pessoa não encontrada"));
 	}
 
 	public void deletar(Long id) {
