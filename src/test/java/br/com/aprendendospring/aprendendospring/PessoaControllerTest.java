@@ -28,16 +28,16 @@ public class PessoaControllerTest {
 	protected TestRestTemplate rest;
 
 	private ResponseEntity<Pessoa> getPessoa(String url) {
-		return rest.getForEntity(url, Pessoa.class);
+		return rest.withBasicAuth("user", "123").getForEntity(url, Pessoa.class);
 	}
 
 	private ResponseEntity<List<Pessoa>> getPessoas(String url) {
-		return rest.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Pessoa>>() {
+		return rest.withBasicAuth("user", "123").exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Pessoa>>() {
 		});
 	}
 
 	private ResponseEntity<Pessoa> postPessoa(String url, Pessoa pessoa) {
-		return rest.postForEntity(url, pessoa, null);
+		return rest.withBasicAuth("admin", "123").postForEntity(url, pessoa, null);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class PessoaControllerTest {
 		assertNotNull(pessoaInserida);
 		assertEquals(pessoaInserida.getId(), 1L);
 
-		rest.delete(location);
+		rest.withBasicAuth("user", "123").delete(location);
 
 	}
 

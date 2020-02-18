@@ -4,7 +4,10 @@ public class Mensagem {
 
 	private String mensagem;
 	private String httpStatus;
-	private Integer codigo;
+
+	public Mensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 
 	public Mensagem(String mensagem, String httpStatus) {
 		this.mensagem = mensagem;
@@ -25,14 +28,6 @@ public class Mensagem {
 
 	public void setHttpStatus(String httpStatus) {
 		this.httpStatus = httpStatus;
-	}
-
-	public Integer getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
 	}
 
 }
